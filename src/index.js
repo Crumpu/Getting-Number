@@ -1,9 +1,9 @@
 'use strict';
-let current = 1;
-const target = 13;
 
+const target = 12;
+// debugger
 function way(target) {
-  function findNumber(current, intermediateValue) {
+  function findNumber(current = 1, intermediateValue = '1') {
     if (current === target) {
       return intermediateValue;
     }
@@ -11,15 +11,11 @@ function way(target) {
       return null;
     }
 
-    const multiple = findNumber(current * 3, `(${intermediateValue} * 3)`);
-
-    const add = findNumber(current + 5, `(${intermediateValue} + 5)`);
-
-    return multiple || add;
+    return (
+      findNumber(current + 5, `(${intermediateValue} + 5)`) ||
+      findNumber(current * 3, `(${intermediateValue} * 3)`)
+    )
   }
-  const result = findNumber(1, '1');
-
-  return result ? result : null;
+  return findNumber()
 }
-
 console.log(way(target));
